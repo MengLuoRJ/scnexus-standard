@@ -1,18 +1,2 @@
-"use strict";
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// src/metadata/index.ts
-var metadata_exports = {};
-module.exports = __toCommonJS(metadata_exports);
+"use strict";var m=Object.defineProperty;var t=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var a=Object.prototype.hasOwnProperty;var b=(r,o,p,f)=>{if(o&&typeof o=="object"||typeof o=="function")for(let e of x(o))!a.call(r,e)&&e!==p&&m(r,e,{get:()=>o[e],enumerable:!(f=t(o,e))||f.enumerable});return r};var c=r=>b(m({},"__esModule",{value:!0}),r);var d={};module.exports=c(d);
+//# sourceMappingURL=index.js.map
