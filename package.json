@@ -42,8 +42,10 @@
   },
   "typesVersions": {
     "*": {
-      "*": [
-        "./dist/index.d.ts",
+      ".": [
+        "./dist/index.d.ts"
+      ],
+      "metadata": [
         "./dist/metadata/index.d.ts"
       ]
     }
