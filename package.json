@@ -1,22 +1,61 @@
 {
   "name": "scnexus-standard",
   "version": "0.0.1",
+  "author": "MengLuoRJ",
+  "license": "UNLICENSED",
   "description": "SCNexus Standard types, definitions, parsers and so on files.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "keywords": [
+    "SCNexus"
+  ],
+  "homepage": "https://github.com/MengLuoRJ/scnexus-standard#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MengLuoRJ/scnexus-standard.git"
   },
-  "keywords": [
-    "SCNexus"
-  ],
-  "author": "MengLuoRJ",
-  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/MengLuoRJ/scnexus-standard/issues"
   },
-  "homepage": "https://github.com/MengLuoRJ/scnexus-standard#readme"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    },
+    "./metadata": {
+      "require": {
+        "types": "./dist/metadata/index.d.ts",
+        "default": "./dist/metadata/index.js"
+      },
+      "import": {
+        "types": "./dist/metadata/index.d.mts",
+        "default": "./dist/metadata/index.mjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/index.d.ts",
+        "./dist/metadata/index.d.ts",
+        "./dist/*"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "npm run build -- --watch src",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
 }
