@@ -44,8 +44,7 @@
     "*": {
       "*": [
         "./dist/index.d.ts",
-        "./dist/metadata/index.d.ts",
-        "./dist/*"
+        "./dist/metadata/index.d.ts"
       ]
     }
   },
