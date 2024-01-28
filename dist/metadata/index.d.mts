@@ -6,30 +6,30 @@ type Metadata = {
     description: string;
     version: string;
     author: string;
-    localizations?: {
+    localization?: {
         /**
-         * The locale name, should be the same as the file name.
+         * The locale name, should be one of the supported locales.
          * @example `zn-CN`
          */
         locale: string;
         /**
-         * The name of the Customize in the locale.
+         * The name of the Customize in this locale.
          * @example `Wings of Liberty`
          */
         name: string;
         /**
-         * The description of the Customize in the locale.
-         * /
+         * The description of the Customize in this locale.
+         */
         description: string;
         /**
-         * The semver version of the Customize in the locale.
+         * The semver version of the Customize in this locale.
          * @example `0.0.1`
          */
         version: string;
         /**
-         * The translaors of the localization.
+         * The translaors of this localization.
          */
-        translator: string[];
+        translators: string[];
     }[];
     /**
      * Type of the metadata.
@@ -42,12 +42,6 @@ type Metadata = {
      * @default undefined
      */
     campaign?: CampaignType;
-    /**
-     * The luancher map file which will be run when player play this customize.
-     */
-    luancher?: {
-        map_name: string;
-    };
     /**
      * Relative path to the Maps folder from the map file.
      * Not used as default when the map files are in the root of the Maps folder.
@@ -69,7 +63,7 @@ type Metadata = {
          * @example `Level1.SC2Map`
          */
         name: string;
-        description: string;
+        description?: string;
         version?: string;
         /**
          * If the file is saved as Components files
@@ -100,7 +94,7 @@ type Metadata = {
      */
     mods?: {
         name: string;
-        description: string;
+        description?: string;
         version?: string;
         /**
          * If the file is saved as Components files
@@ -114,15 +108,47 @@ type Metadata = {
          */
         relative_path?: string;
         /**
+         * **[Experimental Functional]** This would be replaced with other function
+         *
          * Determine if this dependency is on upstream.
          *
          * If set to `true`, the dependency will require the player to install the upstream dependency first,
          * and the Customize compressed file can be without this dependency file.
          *
+         * @experimental
+         *
          * @default false
          */
         upstream?: boolean;
     }[];
+    /**
+     * Declear the dependencis will that be used, these usually to include mods files that not been delivered within this package.
+     *
+     * *This filed is designed to replace upsteam mods function.*
+     *
+     * @experimental
+     */
+    dependencies?: {
+        name: string;
+        description: string;
+        version?: string;
+    }[];
+    /**
+     * The luancher map file which will be run when player play this customize.
+     */
+    luancher?: {
+        map_name: string;
+    };
+    /**
+     * Declear the bank type that be used when `type` set to `"Campaign"`
+     *
+     * `"official"` means using the banks that set in the official campaigns.
+     *
+     * `"custom"` means using customed bank that set by content creator,
+     * which should be set in `banks` field with their names.
+     *
+     * `"inactive"` means there no banks will be used, equals to `undefined`
+     */
     campaign_bank?: "offcial" | "custom" | "inactive";
     banks?: {
         name: string;
@@ -144,17 +170,14 @@ type Metadata = {
 type MetadataRichinfo = {
     website?: string;
     social?: {
-        general?: string;
         twitter?: string;
         discord?: string;
         youtube?: string;
         weibo?: string;
         bilibili?: string;
         qq_group?: string;
-        wechat_official_account?: string;
     };
-    donate?: {
-        general?: string;
+    sponsor?: {
         paypal?: string;
         patreon?: string;
         buymeacoffee?: string;
@@ -174,14 +197,12 @@ type MetadataLocal = {
      */
     metadata_path?: string;
     /**
-     * Size of the file in bytes.
+     * Size of the file in bytes (Byte).
      */
     total_size?: number;
     file_count?: number;
 };
-type MetadataStandard = Metadata & {
-    richinfo?: MetadataRichinfo;
-};
+type MetadataStandard = Metadata & MetadataRichinfo;
 type MetadataCampaign = Omit<MetadataStandard, "maps"> & {
     type: "Campaign";
 };
