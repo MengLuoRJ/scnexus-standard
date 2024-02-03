@@ -3,7 +3,7 @@ export type MetadataType = "Campaign" | "Customize" | string;
 export type CampaignType = "WOL" | "HOTS" | "LOTV" | "NCO";
 
 export type Metadata = {
-  snid?: string;
+  snid?: number;
   name: string;
   description: string;
   tags: string[];
