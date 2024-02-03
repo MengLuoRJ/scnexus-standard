@@ -1,6 +1,6 @@
 {
   "name": "scnexus-standard",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "MengLuoRJ",
   "license": "UNLICENSED",
   "description": "SCNexus Standard types, definitions, parsers and so on files.",
