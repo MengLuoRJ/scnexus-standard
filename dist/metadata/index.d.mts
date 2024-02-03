@@ -1,7 +1,7 @@
 type MetadataType = "Campaign" | "Customize" | string;
 type CampaignType = "WOL" | "HOTS" | "LOTV" | "NCO";
 type Metadata = {
-    snid?: string;
+    snid?: number;
     name: string;
     description: string;
     tags: string[];
