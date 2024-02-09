@@ -6,7 +6,7 @@ export type Metadata = {
   snid?: number;
   name: string;
   description: string;
-  tags: string[];
+  tags?: string[];
   version: string;
   author: string;
   localization?: {
