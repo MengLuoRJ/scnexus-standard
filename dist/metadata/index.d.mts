@@ -17,20 +17,20 @@ type Metadata = {
          * The name of the Customize in this locale.
          * @example `Wings of Liberty`
          */
-        name: string;
+        name?: string;
         /**
          * The description of the Customize in this locale.
          */
-        description: string;
+        description?: string;
         /**
          * The semver version of the Customize in this locale.
          * @example `0.0.1`
          */
-        version: string;
+        version?: string;
         /**
          * The translaors of this localization.
          */
-        translators: string[];
+        translators?: string[];
     }[];
     /**
      * Type of the metadata.
