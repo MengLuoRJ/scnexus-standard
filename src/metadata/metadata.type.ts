@@ -169,6 +169,28 @@ export type Metadata = {
    * @default undefined
    */
   manager?: "SCNexus" | "CCM";
+  /**
+   * The mode that how should the manager treat this package.
+   * 
+   * `"standard"` means the manager will recognize and process the compressed file strictly,
+   * which following the standard and the settings in this metadata file.
+   * 
+   * **Please use `"standard"` as possible, low level modes as follow are not safe.**
+   * 
+   * `"paths_math"` means the manager will recognize files by locating paths,
+   * that decides which directory the file should be placed,
+   * **path** (e.g. "Maps", "Mods") and **file extension** (e.g. ".SC2Map") will be recognized.
+   * the standard and the setting in this metadata file will be ignored.
+   * 
+   * `"extensions_match"` means the manager will only recognize the file by extensions,
+   * the files locating paths will be ingnored and only up to its extension,
+   * which also says all files with ".SC2Map" will be placed at root of "Maps" directory,
+   * and the files with ".SC2Mod" will be placed at root of "Mods" directory.
+   * the standard and the setting in this metadata file will be ignored.
+   * 
+   * @default `standard`
+   */
+  mode?: "standard" | "paths_match" | "extensions_match";
 };
 
 export type MetadataRichinfo = {
