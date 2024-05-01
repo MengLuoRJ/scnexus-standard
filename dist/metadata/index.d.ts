@@ -235,5 +235,8 @@ type MetadataStandard = Metadata & MetadataRichinfo;
 type MetadataInformated = MetadataStandard & {
     localinfo: MetadataLocalinfo;
 };
+type MetadataInformatedList = MetadataInformated[];
+type MetadataInformatedCampaignSet = Record<CampaignType, MetadataInformated | undefined>;
+type MetadataInformatedCampaignListSet = Record<CampaignType, MetadataInformatedList>;
 
-export type { CampaignType, Metadata, MetadataInformated, MetadataLocalinfo, MetadataRichinfo, MetadataStandard, MetadataType };
+export type { CampaignType, Metadata, MetadataInformated, MetadataInformatedCampaignListSet, MetadataInformatedCampaignSet, MetadataInformatedList, MetadataLocalinfo, MetadataRichinfo, MetadataStandard, MetadataType };
