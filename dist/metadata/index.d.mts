@@ -23,6 +23,10 @@ type Metadata = {
          */
         description?: string;
         /**
+         * The name of the author in this locale
+         */
+        author?: string;
+        /**
          * The semver version of the Customize in this locale.
          * @example `0.0.1`
          */
@@ -34,6 +38,12 @@ type Metadata = {
     }[];
     /**
      * Type of the metadata.
+     *
+     * `"Campaign"` will turn this file set into Campaign Package,
+     * which will include the process of official campaigns' file in `<GameRoot>\Maps\Campaign`.
+     *
+     * `"Customize"` means this file is a Customize Mod / Project.
+     *
      * @value `Campaign` | `Customize`
      */
     type: MetadataType;
@@ -147,10 +157,8 @@ type Metadata = {
      *
      * `"custom"` means using customed bank that set by content creator,
      * which should be set in `banks` field with their names.
-     *
-     * `"inactive"` means there no banks will be used, equals to `undefined`
      */
-    campaign_bank?: "offcial" | "custom" | "inactive";
+    bank_enable?: "offcial" | "custom";
     banks?: {
         name: string;
         description: string;
@@ -159,9 +167,13 @@ type Metadata = {
     /**
      * Specify the manager of this Customize.
      *
+     * `"SCNexus"` means this file should be treat by SCNexus Manager within SCNexus Standard.
+     *
+     * `"CCM"` meas this file is following CCM standard, which will be treat as CCM simulately.
+     *
      * This default to `undefined` which means the manager is not specified,
      * then will be determined by the metadata file extension,
-     * `metadata.json` will be `SCNexus` and `metadata.txt` will be `CCM`.
+     * `metadata.json` will be `SCNexus`, and `metadata.txt` will be `CCM`.
      *
      * @value `SCNexus` | `CCM`
      * @default undefined
@@ -180,15 +192,9 @@ type Metadata = {
      * **path** (e.g. "Maps", "Mods") and **file extension** (e.g. ".SC2Map") will be recognized.
      * the standard and the setting in this metadata file will be ignored.
      *
-     * `"extensions_match"` means the manager will only recognize the file by extensions,
-     * the files locating paths will be ingnored and only up to its extension,
-     * which also says all files with ".SC2Map" will be placed at root of "Maps" directory,
-     * and the files with ".SC2Mod" will be placed at root of "Mods" directory.
-     * the standard and the setting in this metadata file will be ignored.
-     *
      * @default `standard`
      */
-    mode?: "standard" | "paths_match" | "extensions_match";
+    manager_mode?: "standard" | "paths_match";
 };
 type MetadataRichinfo = {
     website?: string;
@@ -207,7 +213,7 @@ type MetadataRichinfo = {
         afdian?: string;
     };
 };
-type MetadataLocal = {
+type MetadataLocalinfo = {
     /**
      * Path to the metadata file.
      *
@@ -220,32 +226,14 @@ type MetadataLocal = {
      */
     metadata_path?: string;
     /**
-     * Size of the file in bytes (Byte).
+     * Size of the files in bytes (Byte).
      */
-    total_size?: number;
-    file_count?: number;
+    files_size?: number;
+    files_count?: number;
 };
 type MetadataStandard = Metadata & MetadataRichinfo;
-type MetadataCampaign = Omit<MetadataStandard, "maps"> & {
-    type: "Campaign";
+type MetadataInformated = MetadataStandard & {
+    localinfo: MetadataLocalinfo;
 };
-type MetadataCampaignSet = Record<CampaignType, MetadataCampaign | undefined>;
-type CampaignInformation = MetadataCampaign & {
-    /**
-     * Local information for the metadata file
-     * @type {MetadataLocal}
-     */
-    local: MetadataLocal;
-};
-type CampaignInformationSet = Record<CampaignType, CampaignInformation | undefined>;
-type CampaignInformationListSet = Record<CampaignType, CampaignInformation[] | undefined>;
-type MetadataCustomize = Omit<MetadataStandard, "campaign_bank"> & {
-    type: "Customize";
-};
-type MetadataCustomizeList = MetadataCustomize[];
-type CustomizeInformation = MetadataCustomize & {
-    local: MetadataLocal;
-};
-type CustomizeInformationList = CustomizeInformation[];
 
-export type { CampaignInformation, CampaignInformationListSet, CampaignInformationSet, CampaignType, CustomizeInformation, CustomizeInformationList, Metadata, MetadataCampaign, MetadataCampaignSet, MetadataCustomize, MetadataCustomizeList, MetadataLocal, MetadataRichinfo, MetadataStandard, MetadataType };
+export type { CampaignType, Metadata, MetadataInformated, MetadataLocalinfo, MetadataRichinfo, MetadataStandard, MetadataType };
