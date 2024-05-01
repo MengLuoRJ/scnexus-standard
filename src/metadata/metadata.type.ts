@@ -241,3 +241,15 @@ export type MetadataStandard = Metadata & MetadataRichinfo;
 export type MetadataInformated = MetadataStandard & {
   localinfo: MetadataLocalinfo;
 };
+
+export type MetadataInformatedList = MetadataInformated[];
+
+export type MetadataInformatedCampaignSet = Record<
+  CampaignType,
+  MetadataInformated | undefined
+>;
+
+export type MetadataInformatedCampaignListSet = Record<
+  CampaignType,
+  MetadataInformatedList
+>;
